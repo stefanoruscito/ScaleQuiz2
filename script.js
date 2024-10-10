@@ -1,38 +1,39 @@
-// Funzione per ottenere un numero casuale in un range
+// Function to get a random integer within a range
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-// Estrazione casuale di una scala
+// Randomly extract a scale
 const scaleKeys = Object.keys(scales);
 const randomScale = scaleKeys[getRandomInt(scaleKeys.length)];
-const scaleNotes = scales[randomScale];
+const scaleData = scales[randomScale];
+const scaleNotes = scaleData.notes;
+const scaleDegrees = scaleData.degrees;
 
-// Estrazione casuale di un grado della scala
-const randomDegree = getRandomInt(scaleNotes.length) + 1; // I gradi vanno da 1 a 7
-const correctNote = scaleNotes[randomDegree - 1];
+// Randomly extract a degree from the scale
+const randomDegreeIndex = getRandomInt(scaleNotes.length);
+const correctNote = scaleNotes[randomDegreeIndex];
+const degree = scaleDegrees[randomDegreeIndex];
 
-// Visualizza la domanda
-document.getElementById('question').textContent = `Qual è la ${randomDegree}ª nota della scala ${randomScale}?`;
+// Display the question
+document.getElementById('question').textContent = `What is the ${degree} note of the ${randomScale} scale?`;
 
-// Gestisce l'invio della risposta
+// Handle answer submission
 document.getElementById('submit-answer').addEventListener('click', function() {
     const userAnswer = document.getElementById('user-answer').value.trim();
     const feedback = document.getElementById('feedback');
 
     if (userAnswer.toLowerCase() === correctNote.toLowerCase()) {
-        feedback.textContent = 'Corretto!';
+        feedback.textContent = 'Correct!';
     } else {
-        feedback.textContent = `Sbagliato! La risposta corretta era: ${correctNote}`;
+        feedback.textContent = `Incorrect! The correct answer was: ${correctNote}`;
     }
 
     document.getElementById('result').classList.remove('hidden');
     document.getElementById('quiz-container').classList.add('hidden');
 });
 
-// Mostra la scala completa
+// Show the full scale
 document.getElementById('show-scale').addEventListener('click', function() {
-    document.getElementById('scale-display').textContent = `Scala ${randomScale}: ${scaleNotes.join(', ')}`;
-    document.getElementById('full-scale').classList.remove('hidden');
-    document.getElementById('result').classList.add('hidden');
-});
+    const scaleDisplay = scaleNotes.map((note, index) => `${scaleDegrees[index]}: ${note}`).join(', ');
+    document.getElementById('scale-display').textContent = `${randomScale
