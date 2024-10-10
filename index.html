@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Scale Maggiori</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Scale Maggiori</h1>
+        <div id="quiz-container">
+            <p id="question"></p>
+            <input type="text" id="user-answer" placeholder="Inserisci la tua risposta">
+            <button id="submit-answer">Invia</button>
+        </div>
+        <div id="result" class="hidden">
+            <p id="feedback"></p>
+            <button id="show-scale">Mostra scala completa</button>
+        </div>
+        <div id="full-scale" class="hidden">
+            <h2>Scala estratta:</h2>
+            <p id="scale-display"></p>
+            <button onclick="location.reload()">Ricomincia</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
